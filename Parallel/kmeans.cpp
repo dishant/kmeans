@@ -58,7 +58,7 @@ int main(int argc, char **argv)
 {
 	if(argc < 4)
 	{
-	    cout<<"Usage: ./kmeans dimensions no_of_points k\n"
+	    cout<<"Usage: ./kmeans dimensions no_of_points k\n";
 	}
 
 	int dimensions = atoi(argv[1]);
