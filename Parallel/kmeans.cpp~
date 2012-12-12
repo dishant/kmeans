@@ -159,9 +159,9 @@ int main(int argc, char **argv)
 		double* receive_array = new double[size_expected];
 		MPI_Status status;
 		MPI_Recv(receive_array,size_expected,MPI_DOUBLE,0,1, MPI_COMM_WORLD, &status);
-		clusters = deserialize(receive_array,dimensions);
+		clusters = deserialize(receive_array);
 		MPI_Recv(receive_array,size_expected,MPI_DOUBLE,0,2, MPI_COMM_WORLD, &status);
-		points = deserialize(receive_array,dimensions);
+		points = deserialize(receive_array);
 	}
 
 	MPI_Barrier(MPI_COMM_WORLD);
@@ -218,7 +218,7 @@ int main(int argc, char **argv)
 			{
 				MPI_Recv(receive_array,size_expected,MPI_DOUBLE,i, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
 				vector<Point> received_sum_of_points;
-				received_sum_of_points = deserialize(receive_array,dimensions);
+				received_sum_of_points = deserialize(receive_array);
 
 				for(int j=0; j<K; ++j)
 				{
@@ -287,7 +287,7 @@ int main(int argc, char **argv)
 			MPI_Status status;
 			MPI_Recv(receive_array,size_expected,MPI_DOUBLE,0, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
 			if(receive_array[0] == 0) break;//indicates that clusters are not changing anymore
-			clusters = deserialize(receive_array,dimensions);
+			clusters = deserialize(receive_array);
 		}
 	}
 	if(mpi_id == 0)cout<<check_accuracy(clusters,input_clusters,x)<<endl;
