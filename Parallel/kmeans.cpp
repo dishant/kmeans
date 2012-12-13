@@ -290,9 +290,12 @@ int main(int argc, char **argv)
 			clusters = deserialize(receive_array,dimensions);
 		}
 	}
-	if(mpi_id == 0)cout<<check_accuracy(clusters,input_clusters,x)<<endl;
-  	te = MPI_Wtime();
-  	fprintf(stderr, "Time_Taken %g \n", te-ts);
+	te = MPI_Wtime();
+	if(mpi_id == 0)
+	{	cout<<te-ts<<endl;
+		cout<<check_accuracy(clusters,input_clusters,x)<<endl;
+	}
+  	
 	MPI_Finalize();
 	return 0;
 }
